@@ -31,7 +31,7 @@ SDA: pin de señal de datos de la interfaz I2C.
 * ESP32CAM       DHT11
     5V            Vcc
     GND           GND
-    GPI13         DATA
+    GPIO13        DATA
 
  * Componente     PinESP32CAM     Estados lógicos
  * ledStatus------GPIO 33---------On=>LOW, Off=>HIGH
@@ -64,6 +64,7 @@ const int pintrigger = 4;
 
 // Variables del programa
 unsigned long tiempo, distancia;
+int identificado = 1;
 
 
 // Inicialización del sensor DHT.
@@ -82,7 +83,7 @@ void setup()
  
  // configurar los pines utilizados por el sensor HC-SR04
   pinMode(pinecho, INPUT);
-  pinMode(pintrigger, OUTPUT)
+  pinMode(pintrigger, OUTPUT);
  
   // Iniciar el WiFi
   
@@ -126,11 +127,11 @@ void loop()
   Serial.print(F("Distancia: "));
   Serial.print(distancia);
   Serial.println(F(" cm"));
-  if (distancia < 50)
+  if (distancia < 50 && identificado!= 0)
     {
-      Serial.print(F("Humedad: "));
+      Serial.print(F("Humedad ambiental: "));
       Serial.print(hambiente);
-      Serial.print(F("% Temperatura: "));
+      Serial.print(F("% Temperatura ambiental: "));
       Serial.print(tambiente);
       Serial.println(F("°C "));
     }
