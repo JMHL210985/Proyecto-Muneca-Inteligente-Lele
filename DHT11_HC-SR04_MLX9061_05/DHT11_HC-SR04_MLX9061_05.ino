@@ -5,7 +5,7 @@
  * y humedad ambiental(DHT11) con sensor Ultrasonico 
  * (HC-SR04)
  * 
- * Por: Juan Manuel Hernández Lara
+ * Por: Juan Manuel Hernández Lara, Domingo Rosales, Armando Cruz
  * Fecha: 18 de julio de 2022
  * 
  * Este programa controla el encendido de la camara del ESP32CAM  
@@ -55,8 +55,7 @@ SDA: pin de señal de datos de la interfaz I2C.
 //#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 
-#define I2C_SDA 14
-#define I2C_SCL 15
+
 
 
 
