@@ -1,0 +1,28 @@
+Para crear una base de datos, los pasos son los siguientes
+
+1. Ejecutar MySQL
+
+sudo mysql
+
+2. Crear base de datos
+
+CREATE DATABASE datos;
+
+3. Crear tabla, contendrá ID auto indexado, fecha automática, id de usuario, temperatura y humedad
+
+CREATE TABLE lele (id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP, temp_amb FLOAT(4,2) NOT NULL, temp_usu FLOAT(4,2) NOT NULL,hum INT(1) UNSIGNED NOT NULL, deteccion TINYINT UNSIGNED NOT NULL);
+
+Para que este ejemplo funcione y NodeRed pueda acceder a la base de datos, es necesario configurar el metodo de autentificación a uno simplemente por contraseña.
+
+1. Comprueba el metodo de autentificación del usuario que usarás para acceder a la base de datos creada
+
+SELECT user, authentication_string, plugin, host FROM mysql.user;
+
+En la columna plugin, el usuario que usarás para acceder a la base de datos debe ser de tipo mysql_native_password. En caso contrario, ejecuta el siguiente comando
+
+ALTER USER 'usuario'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+
+Finalmente, se muestra el código en Java Scritp a colocar en el nodo de funcion del flow en NodeRed de este repositorio
+
+msg.topic="INSERT INTO dht (idd,temp,hum) VALUES ('"+msg.payload.temp+"','"+msg.payload.hum+"')";
+return msg;

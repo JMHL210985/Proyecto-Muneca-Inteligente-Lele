@@ -1,0 +1,304 @@
+[
+    {
+        "id": "7023b62f89183e3a",
+        "type": "tab",
+        "label": "LELE",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9168f3207325ee1a",
+        "type": "mqtt in",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "topic": "codigoIoT/LELE/hum",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4f8828fc75374400",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "46913c1b31f456b7"
+            ]
+        ]
+    },
+    {
+        "id": "46913c1b31f456b7",
+        "type": "function",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "func": "global.set (\"hum\", parseInt(msg.payload));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "593a68b210e7db9a",
+        "type": "inject",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "30",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "9264bdff6d25f2f6"
+            ]
+        ]
+    },
+    {
+        "id": "9264bdff6d25f2f6",
+        "type": "function",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "func": "\n\nmsg.topic=\"INSERT INTO lele (temp_amb,temp_usu,hum,deteccion) VALUES ('\"+global.get (\"temp_amb\")+\"','\"+global.get (\"temp_usu\")+\"','\"+global.get (\"hum\")+\"','\"+global.get (\"deteccion\")+\"')\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "424250f607474ba7"
+            ]
+        ]
+    },
+    {
+        "id": "424250f607474ba7",
+        "type": "mysql",
+        "z": "7023b62f89183e3a",
+        "mydb": "4fbfe41bd3aceacb",
+        "name": "",
+        "x": 610,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9a18042b7b10fd75",
+        "type": "mqtt in",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "topic": "codigoIoT/LELE/temp_amb",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4f8828fc75374400",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 80,
+        "wires": [
+            [
+                "ed51e99e3ab8361f"
+            ]
+        ]
+    },
+    {
+        "id": "ed51e99e3ab8361f",
+        "type": "function",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "func": "global.set (\"temp_amb\", parseFloat(msg.payload));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a876c6144c5f1841",
+        "type": "mqtt in",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "topic": "codigoIoT/LELE/temp_usu",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4f8828fc75374400",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "56447309e396643d"
+            ]
+        ]
+    },
+    {
+        "id": "56447309e396643d",
+        "type": "function",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "func": "global.set (\"temp_usu\", parseFloat(msg.payload));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f363c41186ebd00a",
+        "type": "mqtt in",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "topic": "codigoIoT/LELE/deteccion",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "4f8828fc75374400",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 260,
+        "wires": [
+            [
+                "27f0b49cfe7ce944"
+            ]
+        ]
+    },
+    {
+        "id": "27f0b49cfe7ce944",
+        "type": "function",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "func": "global.set (\"deteccion\", parseFloat(msg.payload));\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9ef7a38ed2101491",
+        "type": "inject",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 460,
+        "wires": [
+            [
+                "cc92d175c38f5925"
+            ]
+        ]
+    },
+    {
+        "id": "cc92d175c38f5925",
+        "type": "function",
+        "z": "7023b62f89183e3a",
+        "name": "",
+        "func": "global.set (\"temp_amb\", 0);\nglobal.set (\"temp_usu\", 0);\nglobal.set (\"hum\", 0);\nglobal.set (\"deteccion\", 0);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f8828fc75374400",
+        "type": "mqtt-broker",
+        "name": "hivemq",
+        "broker": "18.195.236.18",
+        "port": "1883",
+        "clientid": "acc-sic-31094",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "4fbfe41bd3aceacb",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "datos",
+        "tz": "",
+        "charset": "UTF8"
+    }
+]
